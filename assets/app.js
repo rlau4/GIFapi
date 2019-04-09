@@ -2,7 +2,7 @@
 var topics = ["bird", "horse", "dog", "cat"];
 
 function displayGif() {
-    var gif = "cat";//$(this).attr("data-name");
+    var gif = $(this).attr("data-name");
 
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=fm8MjdU6IHrGUTJVzX5qk2jINM706cal&limit=10&rating=pg";
 
@@ -48,14 +48,14 @@ function displayGif() {
         }
     });
 };
-displayGif();
+//displayGif();
 //creates buttons from topics list
-function createButton() {
+function createButtons() {
     $("#gif-buttons").empty();
 
     for (var i = 0; i < topics.length; i++) {
         var a  = $("<button>");
-        a.addClass("btn btn-outline-primary");
+        a.addClass("btn btn-outline-primary gif-loader");
         a.attr("data-name", topics[i]);
         a.text(topics[i]);
         $("#gif-buttons").append(a);
@@ -67,9 +67,9 @@ $("#add-gif").on("click", function(event){
 
     var gif = $("#gif-input").val().trim();
     topics.push(gif);
-    createButton();
+    createButtons();
 });
 
-$(document).on("click", ".btn btn-outline-primary", displayGif);
+$("#gif-buttons").on("click", ".gif-loader", displayGif);
 
-createButton();
+createButtons();
